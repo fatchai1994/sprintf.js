@@ -9,12 +9,12 @@
         not_type: /[^T]/,
         not_primitive: /[^v]/,
         number: /[diefg]/,
-        numeric_arg: /[bcdiefguxX]/,
+        numeric_arg: /[bcdiefguxX]|ld|lu/,
         json: /[j]/,
         not_json: /[^j]/,
         text: /^[^\x25]+/,
         modulo: /^\x25{2}/,
-        placeholder: /^\x25(?:([1-9]\d*)\$|\(([^)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-gijostTuvxX])/,
+        placeholder: /^\x25(?:([1-9]\d*)\$|\(([^)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-gijostTuvxX]|ld|lu)/,
         key: /^([a-z_][a-z_\d]*)/i,
         key_access: /^\.([a-z_][a-z_\d]*)/i,
         index_access: /^\[(\d+)\]/,
@@ -74,6 +74,7 @@
                         arg = String.fromCharCode(parseInt(arg, 10))
                         break
                     case 'd':
+                    case 'ld':
                     case 'i':
                         arg = parseInt(arg, 10)
                         break
@@ -105,6 +106,7 @@
                         arg = (ph.precision ? arg.substring(0, ph.precision) : arg)
                         break
                     case 'u':
+                    case 'lu':
                         arg = parseInt(arg, 10) >>> 0
                         break
                     case 'v':
